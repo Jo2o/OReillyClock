@@ -50,14 +50,13 @@ public class ClockView extends ViewPart {
 
         Runnable redraw = () -> {
             while (!clock.isDisposed()) { // extends Resources have to be disposed
-                // clock.redraw();
+                // clock.redraw(); // this generates exception
                 clock.getDisplay().asyncExec(clock::redraw); // running on UI thread
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     return;
                 }
-
             }
         };
 
