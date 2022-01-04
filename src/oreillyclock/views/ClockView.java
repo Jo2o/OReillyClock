@@ -7,6 +7,8 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.RowData;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbench;
@@ -41,23 +43,16 @@ public class ClockView extends ViewPart {
 
     @Override
     public void createPartControl(Composite parent) {
-        new ClockWidget(parent, SWT.NONE);
-        // final Canvas clock = new Canvas(parent, SWT.NONE); // custom drawing => Canvas
-        // clock.addPaintListener(this::drawClock);
-        //
-        // Runnable redraw = () -> {
-        // while (!clock.isDisposed()) { // extends Resources have to be disposed
-        // // clock.redraw(); // this generates exception
-        // clock.getDisplay().asyncExec(clock::redraw); // running on UI thread
-        // try {
-        // TimeUnit.SECONDS.sleep(1);
-        // } catch (InterruptedException e) {
-        // return;
-        // }
-        // }
-        // };
-        //
-        // new Thread(redraw, "TickTock").start();
+
+        parent.setLayout(new RowLayout(SWT.HORIZONTAL));
+
+        final ClockWidget clock1 = new ClockWidget(parent, SWT.NONE);
+        final ClockWidget clock2 = new ClockWidget(parent, SWT.NONE);
+        final ClockWidget clock3 = new ClockWidget(parent, SWT.NONE);
+
+        clock1.setLayoutData(new RowData(100, 100));
+        clock2.setLayoutData(new RowData(150, 150));
+        clock3.setLayoutData(new RowData(230, 230));
     }
 
     @Override
