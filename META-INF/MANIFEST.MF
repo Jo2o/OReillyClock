@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OReillyClock
+Bundle-SymbolicName: OReillyClock;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: oreillyclock.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: OReillyClock
+Import-Package: javax.inject
+Bundle-ActivationPolicy: lazy
