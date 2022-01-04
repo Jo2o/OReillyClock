@@ -2,6 +2,7 @@ package oreillyclock.views;
 
 
 import java.time.LocalTime;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -44,8 +45,23 @@ public class ClockView extends ViewPart {
 
     @Override
     public void createPartControl(Composite parent) {
-        final Canvas clock = new Canvas(parent, SWT.NONE);
+        final Canvas clock = new Canvas(parent, SWT.NONE); // custom drawing => Canvas
         clock.addPaintListener(this::drawClock);
+
+        Runnable redraw = () -> {
+            while (!clock.isDisposed()) { // extends Resources have to be disposed
+                // clock.redraw();
+                clock.getDisplay().asyncExec(clock::redraw); // running on UI thread
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    return;
+                }
+
+            }
+        };
+
+        new Thread(redraw, "TickTock").start();
     }
 
     private void drawClock(PaintEvent paintEvent) {
