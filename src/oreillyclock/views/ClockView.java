@@ -7,6 +7,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -46,9 +47,9 @@ public class ClockView extends ViewPart {
 
         parent.setLayout(new RowLayout(SWT.HORIZONTAL));
 
-        final ClockWidget clock1 = new ClockWidget(parent, SWT.NONE);
-        final ClockWidget clock2 = new ClockWidget(parent, SWT.NONE);
-        final ClockWidget clock3 = new ClockWidget(parent, SWT.NONE);
+        final ClockWidget clock1 = new ClockWidget(parent, SWT.NONE, new RGB(255, 0, 0));
+        final ClockWidget clock2 = new ClockWidget(parent, SWT.NONE, new RGB(30, 255, 0));
+        final ClockWidget clock3 = new ClockWidget(parent, SWT.NONE, new RGB(50, 0, 255));
 
         clock1.setLayoutData(new RowData(100, 100));
         clock2.setLayoutData(new RowData(150, 150));
