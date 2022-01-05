@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_chaW8G5DEeyaLODsvjMtug"/>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_chaW8G5DEeyaLODsvjMtug">
+  <imports xsi:type="commands:BindingContext" xmi:id="_Bb7ngG58EeyaLODsvjMtug" elementId="org.eclipse.ui.contexts.dialogAndWindow"/>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_g_CC4G5xEeyaLODsvjMtug" featurename="commands" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="commands:Command" xmi:id="_VwqQgG5yEeyaLODsvjMtug" elementId="oreillyclock.command.hello" commandName="hello" description="Says Hello World"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_rLCucG5yEeyaLODsvjMtug" featurename="handlers" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="commands:Handler" xmi:id="_ucLIAG5yEeyaLODsvjMtug" elementId="oreillyclock.handler.HelloHandler" contributionURI="bundleclass://OReillyClock/oreillyclock.commandsandhandlers.HelloHandler" command="_VwqQgG5yEeyaLODsvjMtug"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_kAc6kG5zEeyaLODsvjMtug" featurename="menuContributions" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_-Ak0kG5zEeyaLODsvjMtug" elementId="oreillyclock.menucontribution.0" parentId="help">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_G-vCYG50EeyaLODsvjMtug" elementId="handledmenuitem.Hello" label="Hello" command="_VwqQgG5yEeyaLODsvjMtug"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_W_BVgG58EeyaLODsvjMtug" featurename="bindingTables" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="commands:BindingTable" xmi:id="_fH9ykG58EeyaLODsvjMtug" elementId="oreillyclock.bindingtable.0" bindingContext="_Bb7ngG58EeyaLODsvjMtug">
+      <bindings xmi:id="_ycjBoG58EeyaLODsvjMtug" elementId="oreillyclock.keybinding.0" keySequence="M1+9" command="_VwqQgG5yEeyaLODsvjMtug"/>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>
