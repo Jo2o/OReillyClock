@@ -21,7 +21,7 @@ public class ClockWidget extends Canvas {
     public ClockWidget(Composite parent, int style, RGB rgb) {
         super(parent, style);
 
-        this.color = new Color(parent.getDisplay(), rgb); // FIXME leaked Color
+        this.color = new Color(parent.getDisplay(), rgb); // leaking Color
 
         addPaintListener(this::drawClock);
 
@@ -61,7 +61,7 @@ public class ClockWidget extends Canvas {
     }
 
     private void drawHourHand(PaintEvent paintEvent) {
-        ZonedDateTime now = ZonedDateTime.now();
+        ZonedDateTime now = ZonedDateTime.now(zoneId);
         int hour = now.getHour();
         int arc = (3 - hour) * 30 % 360;
 

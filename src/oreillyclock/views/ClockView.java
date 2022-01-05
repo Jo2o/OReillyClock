@@ -4,6 +4,8 @@ package oreillyclock.views;
 import java.time.ZoneId;
 import javax.inject.Inject;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.RowData;
@@ -39,6 +41,7 @@ public class ClockView extends ViewPart {
         clock3.setLayoutData(new RowData(230, 230));
 
         createTimeZonesCombo(parent);
+        registerTimeZonesListener(clock3);
     }
 
     private void createTimeZonesCombo(Composite parent) {
@@ -47,6 +50,21 @@ public class ClockView extends ViewPart {
         for (String zone : ZoneId.getAvailableZoneIds()) {
             timeZonesCombo.add(zone);
         }
+    }
+
+    private void registerTimeZonesListener(ClockWidget clock) {
+        timeZonesCombo.addSelectionListener(new SelectionListener() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                clock.setZoneId(ZoneId.of(timeZonesCombo.getText()));
+                clock.redraw();
+            }
+            @Override
+            public void widgetDefaultSelected(SelectionEvent e) {
+                clock.setZoneId(ZoneId.systemDefault());
+                clock.redraw();
+            }
+        });
     }
 
     private void findLeak(Composite parent) {
