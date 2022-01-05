@@ -16,6 +16,22 @@
             category="OReillyClock"
             inject="true">
       </view>
+      <view
+             category="OReillyClock"
+             class="oreillyclock.views.TimeZoneView"
+             icon="icons/sample.png"
+             id="oreillyclock.views.TimeZoneView"
+             name="Time Zone View"
+             restorable="true">
+      </view>
+      <e4view
+             category="OReillyClock"
+             class="oreillyclock.views.TimeZoneTreeView"
+             icon="icons/sample.png"
+             id="oreillyclock.views.TimeZoneTreeView"
+             name="Time Zone TREE View"
+             restorable="true">
+      </e4view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
