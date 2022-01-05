@@ -5,7 +5,8 @@ Bundle-SymbolicName: OReillyClock;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: oreillyclock.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.e4.ui.model.workbench;bundle-version="2.2.0.v20210727-1533"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: OReillyClock
 Import-Package: javax.annotation;version="1.3.5",
