@@ -58,5 +58,14 @@
             apply="always">
       </fragment>
    </extension>
-
+   <extension 
+         point="org.eclipse.core.expressions.definitions">
+    <definition id="when.hello.is.active">
+       <with variable="activeContexts">
+         <iterate operator="or">
+           <equals value="org.eclipse.ui.contexts.dialog"/>
+         </iterate>
+       </with>
+     </definition>
+   </extension>
 </plugin>
