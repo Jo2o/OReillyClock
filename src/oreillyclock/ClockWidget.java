@@ -1,6 +1,8 @@
 package oreillyclock;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.concurrent.TimeUnit;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
@@ -13,6 +15,8 @@ import org.eclipse.swt.widgets.Composite;
 public class ClockWidget extends Canvas {
 
     private final Color color;
+
+    private ZoneId zoneId = ZoneId.systemDefault();
 
     public ClockWidget(Composite parent, int style, RGB rgb) {
         super(parent, style);
@@ -43,14 +47,26 @@ public class ClockWidget extends Canvas {
     private void drawClock(PaintEvent paintEvent) {
         paintEvent.gc.drawArc(paintEvent.x, paintEvent.y, paintEvent.width - 1, paintEvent.height - 1, 0, 360);
         drawSecondHand(paintEvent);
+        drawHourHand(paintEvent);
     }
 
     private void drawSecondHand(PaintEvent paintEvent) {
         int seconds = LocalTime.now().getSecond();
         int arc = (15 - seconds) * 6 % 360;
-        Color blue = paintEvent.display.getSystemColor(SWT.COLOR_BLUE);
+
+        // Color blue = paintEvent.display.getSystemColor(SWT.COLOR_BLUE);
+
         paintEvent.gc.setBackground(color);
         paintEvent.gc.fillArc(paintEvent.x, paintEvent.y, paintEvent.width - 1, paintEvent.height - 1, arc - 1, 2);
+    }
+
+    private void drawHourHand(PaintEvent paintEvent) {
+        ZonedDateTime now = ZonedDateTime.now();
+        int hour = now.getHour();
+        int arc = (3 - hour) * 30 % 360;
+
+        paintEvent.gc.setBackground(paintEvent.display.getSystemColor(SWT.COLOR_BLACK));
+        paintEvent.gc.fillArc(paintEvent.x, paintEvent.y, paintEvent.width - 1, paintEvent.height - 1, arc - 5, 10);
     }
 
     @Override
@@ -67,5 +83,9 @@ public class ClockWidget extends Canvas {
             size = 50;
         }
         return new Point(size, size);
+    }
+
+    public void setZoneId(ZoneId zoneId) {
+        this.zoneId = zoneId;
     }
 }
