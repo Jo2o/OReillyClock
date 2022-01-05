@@ -1,6 +1,7 @@
 package oreillyclock.views;
 
 
+import java.time.ZoneId;
 import javax.inject.Inject;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -10,6 +11,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbench;
@@ -32,16 +34,17 @@ import oreillyclock.ClockWidget;
 
 public class ClockView extends ViewPart {
 
-    /**
-     * The ID of the view as specified by the extension.
-     */
     public static final String ID = "oreillyclock.views.ClockView";
+
+    private Combo timeZonesCombo;
 
     @Inject
     IWorkbench workbench;
 
     @Override
     public void createPartControl(Composite parent) {
+
+        findLeak(parent);
 
         parent.setLayout(new RowLayout(SWT.HORIZONTAL));
 
@@ -53,7 +56,15 @@ public class ClockView extends ViewPart {
         clock2.setLayoutData(new RowData(150, 150));
         clock3.setLayoutData(new RowData(230, 230));
 
-        findLeak(parent);
+        createTimeZonesCombo(parent);
+    }
+
+    private void createTimeZonesCombo(Composite parent) {
+        timeZonesCombo = new Combo(parent, SWT.DROP_DOWN);
+        timeZonesCombo.setVisibleItemCount(5);
+        for (String zone : ZoneId.getAvailableZoneIds()) {
+            timeZonesCombo.add(zone);
+        }
     }
 
     private void findLeak(Composite parent) {
@@ -69,7 +80,7 @@ public class ClockView extends ViewPart {
 
     @Override
     public void setFocus() {
-        // viewer.getControl().setFocus();
+        timeZonesCombo.setFocus();
     }
 
     class ViewLabelProvider extends LabelProvider implements ITableLabelProvider {
