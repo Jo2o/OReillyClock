@@ -33,6 +33,11 @@ public class ClockWidget extends Canvas {
             }
         };
         new Thread(redraw, "TickTock").start();
+
+        addDisposeListener(disposeEvent -> {
+            System.out.println("DISPOSING color...");
+            color.dispose();
+        });
     }
 
     private void drawClock(PaintEvent paintEvent) {

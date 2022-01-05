@@ -4,8 +4,8 @@ package oreillyclock.views;
 import javax.inject.Inject;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.RowData;
@@ -40,8 +40,6 @@ public class ClockView extends ViewPart {
     @Inject
     IWorkbench workbench;
 
-    private TableViewer viewer;
-
     @Override
     public void createPartControl(Composite parent) {
 
@@ -54,11 +52,24 @@ public class ClockView extends ViewPart {
         clock1.setLayoutData(new RowData(100, 100));
         clock2.setLayoutData(new RowData(150, 150));
         clock3.setLayoutData(new RowData(230, 230));
+
+        findLeak(parent);
+    }
+
+    private void findLeak(Composite parent) {
+        Object[] objects = parent.getDisplay().getDeviceData().objects;
+        int count = 0;
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i] instanceof Color) {
+                count++;
+            }
+        }
+        System.out.println(">>>>>>>>>>>>> " + count + " COLOR INSTANCES <<<<<<<<<<<<<<<<<<");
     }
 
     @Override
     public void setFocus() {
-        viewer.getControl().setFocus();
+        // viewer.getControl().setFocus();
     }
 
     class ViewLabelProvider extends LabelProvider implements ITableLabelProvider {
