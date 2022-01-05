@@ -7,6 +7,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -32,7 +33,8 @@ public class TimeZoneTreeView {
         imageRegistry.put("sample", ImageDescriptor.createFromURL(getClass().getResource("/icons/sample.png")));
 
         treeViewer = new TreeViewer(parent, SWT.H_SCROLL | SWT.V_SCROLL | SWT.MULTI);
-        treeViewer.setLabelProvider(new TimeZoneLabelProvider(images, imageRegistry));
+        treeViewer.setLabelProvider(
+                new DelegatingStyledCellLabelProvider(new TimeZoneLabelProvider(images, imageRegistry)));
         treeViewer.setContentProvider(new TimeZoneContentProvider());
         treeViewer.setInput(new Object[] {TimeZoneComparator.getTimeZones()});
     }
